@@ -274,7 +274,7 @@ export default function StudentForm() {
                                 </SelectItem>
                               ))
                             ) : (
-                              <SelectItem value="" disabled>
+                              <SelectItem value="no-parents" disabled>
                                 No parents available
                               </SelectItem>
                             )}

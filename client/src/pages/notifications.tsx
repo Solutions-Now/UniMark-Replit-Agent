@@ -387,7 +387,7 @@ export default function Notifications() {
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                  <SelectItem value="">None</SelectItem>
+                                  <SelectItem value="none">None</SelectItem>
                                   {activeRounds?.map(round => (
                                     <SelectItem key={round.id} value={round.id.toString()}>
                                       {round.name} ({round.type === "morning" ? "AM" : "PM"})
@@ -416,7 +416,7 @@ export default function Notifications() {
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                  <SelectItem value="">None</SelectItem>
+                                  <SelectItem value="none">None</SelectItem>
                                   {buses?.map(bus => (
                                     <SelectItem key={bus.id} value={bus.id.toString()}>
                                       Bus #{bus.busNumber}
@@ -446,7 +446,7 @@ export default function Notifications() {
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                <SelectItem value="">All</SelectItem>
+                                <SelectItem value="all">All</SelectItem>
                                 <SelectItem value="parents">All Parents</SelectItem>
                                 <SelectItem value="drivers">All Drivers</SelectItem>
                                 {parents?.map(parent => (
