@@ -1,20 +1,9 @@
-/**
- * Database migration script for the School Bus Tracking System
- * 
- * This script helps with setting up a remote database by:
- * 1. Creating all required tables
- * 2. Setting up relations between tables
- * 3. Creating initial admin user (if needed)
- * 
- * Usage:
- * 1. Set REMOTE_DATABASE_URL environment variable to your remote database URL
- * 2. Run `node scripts/db-setup.js`
- */
 
-const { Pool } = require('@neondatabase/serverless');
-const bcrypt = require('bcrypt');
-const fs = require('fs');
-const path = require('path');
+import { Pool } from '@neondatabase/serverless';
+import bcrypt from 'bcrypt';
+import { createInterface } from 'readline';
+import fs from 'fs';
+import path from 'path';
 
 // Check for remote database URL
 const databaseUrl = process.env.REMOTE_DATABASE_URL;
@@ -233,7 +222,7 @@ async function createTables() {
 
 // Helper function to get user input
 function prompt(question) {
-  const readline = require('readline').createInterface({
+  const readline = createInterface({
     input: process.stdin,
     output: process.stdout
   });
