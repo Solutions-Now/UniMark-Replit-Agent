@@ -142,7 +142,7 @@ export default function LiveTracking() {
                       </SelectItem>
                     ))
                   ) : (
-                    <SelectItem value="" disabled>
+                    <SelectItem value="no-rounds" disabled>
                       No active rounds available
                     </SelectItem>
                   )}
@@ -304,7 +304,7 @@ export default function LiveTracking() {
                               </SelectItem>
                             ))
                           ) : (
-                            <SelectItem value="" disabled>
+                            <SelectItem value="no-rounds" disabled>
                               No active rounds available
                             </SelectItem>
                           )}
