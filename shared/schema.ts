@@ -1,4 +1,5 @@
 import { pgTable, text, serial, integer, boolean, timestamp, json } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -21,6 +22,12 @@ export const insertUserSchema = createInsertSchema(users).omit({
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+
+export const usersRelations = relations(users, ({ many, one }) => ({
+  students: many(students),
+  buses: many(buses),
+  activityLogs: many(activityLogs),
+}));
 
 // Student schema
 export const students = pgTable("students", {
