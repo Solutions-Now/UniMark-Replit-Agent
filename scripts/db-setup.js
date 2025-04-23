@@ -1,9 +1,15 @@
 
-import { Pool } from '@neondatabase/serverless';
+import { Pool, neonConfig } from '@neondatabase/serverless';
 import bcrypt from 'bcrypt';
 import { createInterface } from 'readline';
 import fs from 'fs';
 import path from 'path';
+import ws from 'ws';
+
+// Configure WebSocket for Neon
+if (!globalThis.WebSocket) {
+  neonConfig.webSocketConstructor = ws;
+}
 
 // Check for remote database URL
 const databaseUrl = process.env.REMOTE_DATABASE_URL;
