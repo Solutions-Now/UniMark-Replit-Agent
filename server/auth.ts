@@ -2,8 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Express, Request, Response, NextFunction } from "express";
 import session from "express-session";
-import { scrypt, randomBytes, timingSafeEqual } from "crypto";
-import { promisify } from "util";
+import bcrypt from "bcrypt";
 import { storage } from "./storage-impl";
 import { User as SelectUser } from "@shared/schema";
 
@@ -13,32 +12,14 @@ declare global {
   }
 }
 
-const scryptAsync = promisify(scrypt);
-
-async function hashPassword(password: string) {
-  const salt = randomBytes(16).toString("hex");
-  const buf = (await scryptAsync(password, salt, 64)) as Buffer;
-  return `${buf.toString("hex")}.${salt}`;
+async function hashPassword(password: string): Promise<string> {
+  const saltRounds = 10;
+  return bcrypt.hash(password, saltRounds);
 }
 
-async function comparePasswords(supplied: string, stored: string) {
+async function comparePasswords(supplied: string, stored: string): Promise<boolean> {
   try {
-    const [hashed, salt] = stored.split(".");
-    
-    if (!hashed || !salt) {
-      console.log("Invalid stored password format");
-      return false;
-    }
-    
-    const hashedBuf = Buffer.from(hashed, "hex");
-    const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-    
-    if (hashedBuf.length !== suppliedBuf.length) {
-      console.log("Buffer length mismatch:", hashedBuf.length, suppliedBuf.length);
-      return false;
-    }
-    
-    return timingSafeEqual(hashedBuf, suppliedBuf);
+    return await bcrypt.compare(supplied, stored);
   } catch (error) {
     console.error("Error comparing passwords:", error);
     return false;
