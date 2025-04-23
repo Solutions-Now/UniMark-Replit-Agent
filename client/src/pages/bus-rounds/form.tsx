@@ -364,7 +364,7 @@ export default function BusRoundForm() {
                                       </SelectItem>
                                     ))
                                   ) : (
-                                    <SelectItem value="" disabled>
+                                    <SelectItem value="no-buses" disabled>
                                       No buses available
                                     </SelectItem>
                                   )}

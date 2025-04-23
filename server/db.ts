@@ -5,11 +5,21 @@ import * as schema from "@shared/schema";
 
 neonConfig.webSocketConstructor = ws;
 
-if (!process.env.DATABASE_URL) {
+// Check if remote database URL is provided, otherwise fallback to local
+const databaseUrl = process.env.REMOTE_DATABASE_URL || process.env.DATABASE_URL;
+
+if (!databaseUrl) {
   throw new Error(
     "DATABASE_URL must be set. Did you forget to provision a database?",
   );
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+console.log(`Using database: ${databaseUrl.split('@')[1] || 'local database'}`);
+
+export const pool = new Pool({ 
+  connectionString: databaseUrl,
+  // SSL required for most remote database connections
+  ssl: process.env.REMOTE_DATABASE_URL ? true : undefined
+});
+
 export const db = drizzle({ client: pool, schema });
