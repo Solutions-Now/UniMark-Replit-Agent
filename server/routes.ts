@@ -215,7 +215,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const busData = insertBusSchema.parse(req.body);
       const bus = await storage.createBus(busData);
-      res.status(201).json(bus);
+      if (!res.headersSent) {
+        res.status(201).json(bus);
+      }
 
       // Log activity
       await storage.logActivity({
@@ -225,9 +227,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid bus data", errors: error.errors });
+        if (!res.headersSent) {
+          return res.status(400).json({ message: "Invalid bus data", errors: error.errors });
+        }
       }
-      res.status(500).json({ message: "Failed to create bus" });
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Failed to create bus" });
+      }
     }
   });
 
@@ -372,13 +378,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const roundId = parseInt(req.params.roundId);
       const { studentId, order } = req.body;
-      
+
       const assignment = await storage.assignStudentToRound({
         roundId,
         studentId,
         order,
       });
-      
+
       res.status(201).json(assignment);
 
       // Log activity
@@ -396,7 +402,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const roundId = parseInt(req.params.roundId);
       const studentId = parseInt(req.params.studentId);
-      
+
       await storage.removeStudentFromRound(roundId, studentId);
       res.sendStatus(204);
 
@@ -443,11 +449,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const id = parseInt(req.params.id);
       const round = await storage.updateBusRound(id, { status: "in_progress" });
-      
+
       if (!round) {
         return res.status(404).json({ message: "Bus round not found" });
       }
-      
+
       res.json(round);
 
       // Create notification
@@ -474,11 +480,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const id = parseInt(req.params.id);
       const round = await storage.updateBusRound(id, { status: "completed" });
-      
+
       if (!round) {
         return res.status(404).json({ message: "Bus round not found" });
       }
-      
+
       res.json(round);
 
       // Create notification
