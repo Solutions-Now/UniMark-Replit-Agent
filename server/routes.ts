@@ -131,7 +131,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const studentData = insertStudentSchema.parse(req.body);
       const student = await storage.createStudent(studentData);
-      res.status(201).json(student);
 
       // Log activity
       await storage.logActivity({
@@ -139,11 +138,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         details: { studentId: student.id },
         userId: req.user?.id,
       });
+
+      return res.status(201).json(student);
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ message: "Invalid student data", errors: error.errors });
       }
-      res.status(500).json({ message: "Failed to create student" });
+      console.error("Failed to create student:", error);
+      return res.status(500).json({ message: "Failed to create student" });
     }
   });
 
@@ -175,7 +177,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const id = parseInt(req.params.id);
       await storage.deleteStudent(id);
-      res.sendStatus(204);
 
       // Log activity
       await storage.logActivity({
@@ -183,8 +184,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         details: { studentId: id },
         userId: req.user?.id,
       });
+
+      return res.sendStatus(204);
     } catch (error) {
-      res.status(500).json({ message: "Failed to delete student" });
+      console.error("Failed to delete student:", error);
+      return res.status(500).json({ message: "Failed to delete student" });
     }
   });
 

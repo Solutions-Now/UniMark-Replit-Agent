@@ -53,7 +53,7 @@ export default function StudentForm() {
   });
 
   // Fetch parents for the select dropdown
-  const { data: parents } = useQuery<User[]>({
+  const { data: parents = [] } = useQuery<User[]>({
     queryKey: ["/api/users?role=parent"],
   });
 
@@ -264,13 +264,13 @@ export default function StudentForm() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {parents?.length ? (
+                            {parents.length > 0 ? (
                               parents.map((parent) => (
                                 <SelectItem
                                   key={parent.id}
                                   value={parent.id.toString()}
                                 >
-                                  {parent.fullName}
+                                  {parent.fullName || `Parent ID: ${parent.id}`}
                                 </SelectItem>
                               ))
                             ) : (

@@ -9,7 +9,8 @@ if (!globalThis.WebSocket) {
 }
 
 // Check if remote database URL is provided, otherwise fallback to local
-const databaseUrl = process.env.REMOTE_DATABASE_URL || process.env.DATABASE_URL;
+// const databaseUrl = process.env.REMOTE_DATABASE_URL || process.env.DATABASE_URL;
+const databaseUrl = "postgresql://neondb_owner:npg_b5kpj2LSYPAC@ep-muddy-snow-a4i6ma11-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require";
 
 if (!databaseUrl) {
   throw new Error(
