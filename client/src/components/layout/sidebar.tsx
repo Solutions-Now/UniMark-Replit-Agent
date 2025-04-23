@@ -68,6 +68,26 @@ const navItems = [
     ),
   },
   {
+    href: "/buses",
+    label: "Buses",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5 mr-3"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M8 7H6a2 2 0 00-2 2v3a2 2 0 002 2h2M16 15v-2a2 2 0 00-2-2H8"
+        />
+      </svg>
+    ),
+  },
+  {
     href: "/drivers",
     label: "Bus Drivers",
     icon: (

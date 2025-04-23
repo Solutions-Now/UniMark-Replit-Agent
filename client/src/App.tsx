@@ -17,6 +17,8 @@ import DriversIndex from "@/pages/drivers/index";
 import DriversForm from "@/pages/drivers/form";
 import BusRoundsIndex from "@/pages/bus-rounds/index";
 import BusRoundsForm from "@/pages/bus-rounds/form";
+import BusesIndex from "@/pages/buses/index";
+import BusesForm from "@/pages/buses/form";
 import LiveTracking from "@/pages/live-tracking";
 import Notifications from "@/pages/notifications";
 import ActivityLogs from "@/pages/activity-logs";
@@ -37,6 +39,9 @@ function Router() {
       <ProtectedRoute path="/bus-rounds" component={BusRoundsIndex} />
       <ProtectedRoute path="/bus-rounds/new" component={BusRoundsForm} />
       <ProtectedRoute path="/bus-rounds/:id" component={BusRoundsForm} />
+      <ProtectedRoute path="/buses" component={BusesIndex} />
+      <ProtectedRoute path="/buses/new" component={BusesForm} />
+      <ProtectedRoute path="/buses/:id" component={BusesForm} />
       <ProtectedRoute path="/live-tracking" component={LiveTracking} />
       <ProtectedRoute path="/notifications" component={Notifications} />
       <ProtectedRoute path="/activity-logs" component={ActivityLogs} />
