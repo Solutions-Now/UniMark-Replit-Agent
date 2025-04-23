@@ -3,7 +3,10 @@ import { drizzle } from 'drizzle-orm/neon-serverless';
 import ws from "ws";
 import * as schema from "@shared/schema";
 
-neonConfig.webSocketConstructor = ws;
+// Configure WebSocket for Neon
+if (!globalThis.WebSocket) {
+  neonConfig.webSocketConstructor = ws;
+}
 
 // Check if remote database URL is provided, otherwise fallback to local
 const databaseUrl = process.env.REMOTE_DATABASE_URL || process.env.DATABASE_URL;
