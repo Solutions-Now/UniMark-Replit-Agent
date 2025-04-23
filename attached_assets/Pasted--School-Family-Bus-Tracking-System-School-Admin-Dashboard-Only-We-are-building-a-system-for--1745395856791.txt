@@ -1,0 +1,76 @@
+# 🏫 School-Family Bus Tracking System – School Admin Dashboard Only
+
+We are building a system for *schools, parents, and bus drivers* to manage and track student transportation. I want you to *focus only on building the web-based School Admin Panel* and provide a complete *REST API* that my Flutter mobile apps (for parents and buses) will use.
+
+---
+
+## 🎯 Objective for Replit AI Agent
+
+✅ Build the *Web Admin Panel* for schools  
+✅ Provide a *REST API* backend to integrate with the mobile app (in Flutter)
+
+---
+
+## 🌐 Web Admin Panel (for School Admins)
+
+Use modern frontend tech (HTML/CSS/JS or React/Vue/Svelte) and any backend tech (Node.js, Firebase, Supabase, etc.).
+
+### Admin Features:
+- *Authentication* for admin
+- Manage *Parents* (create, update, delete, view)
+- Manage *Bus Drivers* (create, update, delete, view)
+- Manage *Students* (create, assign to parent)
+- Create and manage *Bus Rounds* (type: morning/evening)
+  - Assign students and a bus to each round
+- View & send *notifications* to bus or parents
+- View *notification logs*
+- Dashboard overview (total students, active rounds, current locations if needed)
+
+---
+
+## 📲 Mobile Integration (Provide APIs)
+
+You must expose a *well-structured REST API* that will allow my mobile Flutter apps to:
+
+1. Authenticate parent and bus accounts
+2. Fetch assigned students
+3. Mark student as absent (specific date)
+4. Fetch live bus location
+5. Allow bus to send GPS location updates
+6. Let bus driver:
+   - View and reorder round students
+   - Send notification types:
+     - "Will arrive soon"
+     - "Arrived"
+     - "Student on the bus"
+     - "Student out of the bus"
+     - "Arrived to school"
+     - "The round has begun"
+   - Start/stop the round
+7. Fetch logs of notifications and student activity
+
+---
+
+## ✅ Please Output the Following:
+
+1. *Admin Dashboard Frontend*
+   - Built with a modern framework (React, Vue, or vanilla JS)
+   - Auth + full UI to manage all entities
+2. *Backend*
+   - Node.js (or Firebase/Supabase if easier)
+   - Provide RESTful API endpoints with auth
+3. *API Documentation*
+   - Clearly explain how mobile apps can interact with the backend
+   - Include endpoints, request/response examples
+4. *Folder structure*
+5. *Database schema* (tables/collections for Users, Students, Rounds, Notifications, Absences, Locations)
+6. *(Optional)* Firebase or Supabase setup
+7. *(Optional)* JWT-based authentication or Firebase Auth
+
+---
+
+Let me know if you can help with:
+- Designing the REST API
+- Setting up database schema
+- Creating user roles (parent, bus, admin)
+- Sending FCM notifications from backend
