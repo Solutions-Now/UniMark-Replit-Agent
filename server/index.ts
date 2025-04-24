@@ -59,10 +59,13 @@ app.use((req, res, next) => {
   // ALWAYS serve the app on port 3000
   // this serves both the API and the client.
   const port = 3000;
-  server.listen({
-    port,
-    host: "localhost",
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0", // Use 0.0.0.0 for Replit
+    },
+    () => {
+      log(`serving on port ${port}`);
+    }
+  );
 })();
