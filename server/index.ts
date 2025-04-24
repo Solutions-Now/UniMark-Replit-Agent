@@ -61,11 +61,11 @@ app.use((req, res, next) => {
   const port = 3000;
   server.listen(
     {
-      port,
+      port: 5000,
       host: "0.0.0.0", // Use 0.0.0.0 for Replit
     },
     () => {
-      log(`serving on port ${port}`);
+      log(`serving on port 5000`);
     }
   );
 })();
