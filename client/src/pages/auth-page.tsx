@@ -30,7 +30,9 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 const registerSchema = insertUserSchema
   .extend({
-    confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -110,13 +112,14 @@ export default function AuthPage() {
                   </svg>
                 </div>
               </div>
-              <h2 className="text-3xl font-bold text-center mb-6">
+              <h2 className="text-3xl font-bold text-primary text-center mb-6">
                 School Bus Tracking System
               </h2>
-              <p className="text-xl mb-4">
-                Welcome to your comprehensive solution for school transportation management!
+              <p className="text-xl text-black mb-4">
+                Welcome to your comprehensive solution for school transportation
+                management!
               </p>
-              <ul className="space-y-3 mt-8">
+              <ul className="space-y-3 mt-8 text-black">
                 <li className="flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +190,7 @@ export default function AuthPage() {
                 </li>
               </ul>
             </div>
-            <p className="text-sm text-white text-opacity-80 mt-8">
+            <p className="text-sm text-black text-opacity-80 mt-8">
               © 2023 School Bus Tracker. All rights reserved.
             </p>
           </div>
@@ -233,10 +236,13 @@ export default function AuthPage() {
                   <TabsTrigger value="login">Login</TabsTrigger>
                   <TabsTrigger value="register">Register</TabsTrigger>
                 </TabsList>
-                
+
                 <TabsContent value="login">
                   <Form {...loginForm}>
-                    <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-5">
+                    <form
+                      onSubmit={loginForm.handleSubmit(onLoginSubmit)}
+                      className="space-y-5"
+                    >
                       <FormField
                         control={loginForm.control}
                         name="username"
@@ -244,9 +250,9 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Username</FormLabel>
                             <FormControl>
-                              <Input 
-                                placeholder="Enter your username" 
-                                {...field} 
+                              <Input
+                                placeholder="Enter your username"
+                                {...field}
                               />
                             </FormControl>
                             <FormMessage />
@@ -260,10 +266,10 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                              <Input 
-                                type="password" 
-                                placeholder="Enter your password" 
-                                {...field} 
+                              <Input
+                                type="password"
+                                placeholder="Enter your password"
+                                {...field}
                               />
                             </FormControl>
                             <FormMessage />
@@ -296,9 +302,9 @@ export default function AuthPage() {
                           Forgot password?
                         </Button>
                       </div>
-                      <Button 
-                        type="submit" 
-                        className="w-full" 
+                      <Button
+                        type="submit"
+                        className="w-full"
                         disabled={loginMutation.isPending}
                       >
                         {loginMutation.isPending ? "Signing in..." : "Sign in"}
@@ -309,7 +315,10 @@ export default function AuthPage() {
 
                 <TabsContent value="register">
                   <Form {...registerForm}>
-                    <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
+                    <form
+                      onSubmit={registerForm.handleSubmit(onRegisterSubmit)}
+                      className="space-y-4"
+                    >
                       <FormField
                         control={registerForm.control}
                         name="fullName"
@@ -317,7 +326,10 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Full Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="Enter your full name" {...field} />
+                              <Input
+                                placeholder="Enter your full name"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -330,7 +342,11 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="Enter your email" {...field} />
+                              <Input
+                                type="email"
+                                placeholder="Enter your email"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -343,7 +359,10 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Phone</FormLabel>
                             <FormControl>
-                              <Input placeholder="Enter your phone number" {...field} />
+                              <Input
+                                placeholder="Enter your phone number"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -356,7 +375,10 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Username</FormLabel>
                             <FormControl>
-                              <Input placeholder="Choose a username" {...field} />
+                              <Input
+                                placeholder="Choose a username"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -403,7 +425,9 @@ export default function AuthPage() {
                         className="w-full"
                         disabled={registerMutation.isPending}
                       >
-                        {registerMutation.isPending ? "Creating account..." : "Create account"}
+                        {registerMutation.isPending
+                          ? "Creating account..."
+                          : "Create account"}
                       </Button>
                     </form>
                   </Form>
